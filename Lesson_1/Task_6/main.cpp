@@ -45,13 +45,17 @@ int main() {
 
             for (int y = 0; y < starsCount; y++) {
 
-                double radians = angle * M_PI / 180;
+                double radians = angle * (M_PI / 180); // в радіани переводим кут,
                 double cosVariable =  cos(radians);
                 double sinVariable = sin(radians);
+                //x*cos це шось тіпа проекція відстані точки по іксу на нову вісь, враховуючи кут
+                //y*sin це вже проекція відстані точки по ігрік
+                //коли точка піднімається вверх по ігріку, вона також зсувається за рахунок мінусана проекції ігіріка від іксової по іксу назад
+                int nX = round(centerX + (x * cosVariable - y * sinVariable));
+                //sin угла визначає соотношение протилежного катета до гіпотенузи,тобто ми його юхаєм для визначення вертикального зсуву точки
+                //x*sin визначає, наскільки точка зміститься вертикально через горизонтальний вплив, типу того
 
-                int nX = round(centerX + (x * cosVariable - y * sinVariable)); // наскока точка улетіла по іксу
-                int nY = round(centerY + (x * sinVariable + y * cosVariable)); // наскока точка улетіла по ігріку
-
+                int nY = round(centerY + (x * sinVariable + y * cosVariable));
                 // cout << nY << endl;
                 // cout << nX << endl;
 
@@ -68,8 +72,7 @@ int main() {
         } else {
             usleep(200000/2);
         }
-
-        angle += 10; // міняємо сам кут аби плавно було
+        angle += 10; //+-0,1745329252 // міняємо сам кут аби плавно було
         if (angle >= 360) angle = 0; //шоб змінна не улітучілась в агромні значення угла
     }
 
