@@ -21,6 +21,4 @@ int main()
     for (int i=0; i<188; i+=2)
         cout << char(ImprovizedDict[i]) << " ::: " << ImprovizedDict[i+1] << endl;
 
-
-
 }
