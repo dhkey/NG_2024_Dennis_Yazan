@@ -4,7 +4,10 @@ using namespace std;
 
 int main()
 {
-    char line[64] = "234Hello&*&#world#$%a";
+    char line[64];
+    cout << "Enter the line to count of words: ";
+    cin.getline(line, 64);
+
     bool isCharState = false;
     int words = 0;
     int count = 0;
