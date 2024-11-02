@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     char line[64];
-    cout << "Enter the line to count of words: ";
+    cout << "Enter the line to count its words: ";
     cin.getline(line, 64);
 
     bool isCharState = false;
