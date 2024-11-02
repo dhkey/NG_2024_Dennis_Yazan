@@ -29,7 +29,7 @@ int main() {
         cout << decrypt(encryptedText, move) << endl << endl;
     } // brutforcing all possible options
 
-    // decreapted message, move - 11
+    // decrypted message, move - 11
 
     // Hello, stranger. Seems like you not just a script kiddie, so our agency have some job for you.
     // If you want to accept the “job” offer - just push to your repo the code, that has decrypted this message,
