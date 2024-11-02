@@ -11,6 +11,11 @@ int main()
         cin >> arr[count];
     }
 
+    int arrCopy[5];
+    for (int count = 0; count < 5; count++) {
+        arrCopy[count] = arr[count];
+    }
+
     bool isNotZeroLike = true;
     while (isNotZeroLike){
 
@@ -18,9 +23,9 @@ int main()
 
         for (int isZeroCount=0; isZeroCount < 5; isZeroCount++){
 
-            if (arr[isZeroCount] != 0){
+            if (arrCopy[isZeroCount] != 0){
                 cout<<"*";
-                arr[isZeroCount]-=1;
+                arrCopy[isZeroCount]-=1;
                 isNotZeroLike = true;
             }
             else{
