@@ -14,8 +14,11 @@ int main()
     cout << "Enter line(under 64 chars): ";
     cin.getline(line, 64);
 
-    for (int count = 0; count < 64 && line[count]; count ++)
-        ImprovizedDict[((int(line[count])-32)*2)+1]++;
+    for (int count = 0; count < 64 && line[count]; count ++){
+        int charOffset = int(line[count])-32;
+        int frequencyIndex = charOffset * 2 + 1;
+        ImprovizedDict[frequencyIndex]++;
+    }
 
     for (int i=0; i<188; i+=2)
         cout << char(ImprovizedDict[i]) << " ::: " << ImprovizedDict[i+1] << endl;
