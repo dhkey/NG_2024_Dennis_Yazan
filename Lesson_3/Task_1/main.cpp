@@ -2,21 +2,19 @@
 #include <math.h>
 using namespace std;
 
-void printNewYearTree(int curRow, int rows){
+void printNewYearTree(int rows){
 
-    if (curRow == rows+1)
+    if (rows == 0)
         return;
 
-    for (int spaces = 0; spaces < rows-curRow; spaces++)
-        // cout << " ";
+    for (int spaces = 0; spaces < rows-1; spaces++)
         cout << "-";
-
-    for (int stars = 0; stars < curRow * 2 - 1; stars++)
+    for (int stars = 0; stars < rows-(rows-1); stars++)
         cout << "*";
 
     cout << endl;
 
-    printNewYearTree(curRow+1, rows);
+    printNewYearTree(rows-1);
 
 }
 
@@ -26,7 +24,7 @@ int main()
     cout << "Enter count of rows for new year tree: ";
     cin >> rows;
 
-    printNewYearTree(1, rows);
+    printNewYearTree(rows);
 
     return 0;
 }
