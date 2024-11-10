@@ -1,26 +1,32 @@
 #include <iostream>
 
-
 using namespace std;
 
 int main()
 {
+    const int ASCII_START = 32;
+    const int ASCII_END = 126;
+    const int ASCII_RANGE = ASCII_END - ASCII_START + 1;
+    const int DICT_SIZE = ASCII_RANGE * 2;
+    const int MAX_LINE_LENGTH = 64;
 
-    int ImprovizedDict[189] = {0};
-    for (int count = 32, countNum = 0; count <= 126 ; count++, countNum+=2)
+    int ImprovizedDict[DICT_SIZE] = {0};
+
+    for (int count = ASCII_START, countNum = 0; count <= ASCII_END; count++, countNum += 2)
         ImprovizedDict[countNum] = count;
 
-    char line[64] = "";
-    cout << "Enter line(under 64 chars): ";
-    cin.getline(line, 64);
+    char line[MAX_LINE_LENGTH] = "";
+    cout << "Enter line (under " << MAX_LINE_LENGTH << " chars): ";
+    cin.getline(line, MAX_LINE_LENGTH);
 
-    for (int count = 0; count < 64 && line[count]; count ++){
-        int charOffset = int(line[count])-32;
+    for (int count = 0; count < MAX_LINE_LENGTH && line[count]; count++) {
+        int charOffset = int(line[count]) - ASCII_START;
         int frequencyIndex = charOffset * 2 + 1;
         ImprovizedDict[frequencyIndex]++;
     }
 
-    for (int i=0; i<188; i+=2)
-        cout << char(ImprovizedDict[i]) << " ::: " << ImprovizedDict[i+1] << endl;
+    for (int i = 0; i < DICT_SIZE; i += 2)
+        cout << char(ImprovizedDict[i]) << " ::: " << ImprovizedDict[i + 1] << endl;
 
+    return 0;
 }

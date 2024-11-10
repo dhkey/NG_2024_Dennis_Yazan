@@ -6,33 +6,28 @@ int main()
 {
     int arr[5];
 
-    for (int count = 0; count < 5; count ++) {
+    for (int count = 0; count < 5; count++) {
         cout << "Enter " << count + 1 << "st number: ";
         cin >> arr[count];
     }
 
-    int arrCopy[5];
+    int maxVal = 0;
     for (int count = 0; count < 5; count++) {
-        arrCopy[count] = arr[count];
+        if (arr[count] > maxVal) {
+            maxVal = arr[count];
+        }
     }
 
-    bool isNotZeroLike = true;
-    while (isNotZeroLike){
-
-        isNotZeroLike = false;
-
-        for (int isZeroCount=0; isZeroCount < 5; isZeroCount++){
-
-            if (arrCopy[isZeroCount] != 0){
-                cout<<"*";
-                arrCopy[isZeroCount]-=1;
-                isNotZeroLike = true;
-            }
-            else{
+    for (int row = 1; row <= maxVal; row++) {
+        for (int col = 0; col < 5; col++) {
+            if (arr[col] >= row) {
+                cout << "*";
+            } else {
                 cout << " ";
             }
         }
-
         cout << endl;
     }
+
+    return 0;
 }

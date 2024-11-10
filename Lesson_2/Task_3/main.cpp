@@ -8,7 +8,9 @@ int main()
 
     int arrMaxValue = 0;
 
-    for (int count = 0; count < 20; count++ ){
+    int count = 0;
+
+    while(count < 20){
         int value;
         cout << "Enter " << count+1 << "th value: ";
         cin >> value;
@@ -16,17 +18,16 @@ int main()
         if (value > arrMaxValue)
             arrMaxValue = value;
 
-        if (value == 0){
-            arr[count] = 0;
-            break;
-        }
+        arr[count] = value;
 
-        else arr[count] = value;
+        if (value == 0) break;
+
+        count ++;
     }
 
     cout<<endl;
 
-    int count = 0;
+    count = 0;
 
     while (arr[count] !=0 && count < 20){
         for (int spacesCount = 0; spacesCount < (arrMaxValue-arr[count])/2; spacesCount++)
@@ -38,6 +39,4 @@ int main()
 
         count ++;
     }
-
-
 }
