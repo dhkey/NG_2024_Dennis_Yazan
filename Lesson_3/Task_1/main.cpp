@@ -2,32 +2,37 @@
 
 using namespace std;
 
-
-void printNewYearTree(int curRow, int rows){
-
-    if (curRow == rows+1)
+void printSpaces(int count) {
+    if (count <= 0)
         return;
-
-    for (int spaces = 0; spaces < rows-curRow; spaces++)
-        // cout << " ";
-        cout << "-";
-
-    for (int stars = 0; stars < curRow * 2 - 1; stars++)
-        cout << "*";
-
-    cout << endl;
-
-    printNewYearTree(curRow+1, rows);
-
+    cout << "-";
+    printSpaces(count - 1);
 }
 
-int main()
-{
+void printStars(int count) {
+    if (count <= 0)
+        return;
+    cout << "*";
+    printStars(count - 1);
+}
+
+void printRow(int curRow, int rows) {
+    if (curRow > rows)
+        return;
+
+    printSpaces(rows - curRow);
+    printStars(curRow * 2 - 1);
+    cout << endl;
+
+    printRow(curRow + 1, rows);
+}
+
+int main() {
     int rows = 0;
     cout << "Enter count of rows for new year tree: ";
     cin >> rows;
 
-    printNewYearTree(1, rows);
+    printRow(1, rows);
 
     return 0;
 }
