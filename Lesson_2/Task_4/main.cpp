@@ -25,8 +25,8 @@ int main()
         ImprovizedDict[frequencyIndex]++;
     }
 
-    for (int i = 0; i < DICT_SIZE; i += 2)
-        cout << char(ImprovizedDict[i]) << " ::: " << ImprovizedDict[i + 1] << endl;
+    for (int count = 0; count < DICT_SIZE; count += 2)
+        cout << char(ImprovizedDict[count]) << " ::: " << ImprovizedDict[count + 1] << endl;
 
     return 0;
 }
