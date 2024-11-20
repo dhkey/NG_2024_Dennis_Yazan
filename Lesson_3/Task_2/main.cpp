@@ -8,6 +8,42 @@ struct Matrix {
     int rows;
     int columns;
     vector<vector<int>> matrix;
+
+    Matrix operator+(const Matrix &other) const {
+        if (rows != other.rows || columns != other.columns) {
+            throw invalid_argument("matrices must have the same dimensions for addition");
+        }
+
+        Matrix result;
+        result.rows = rows;
+        result.columns = columns;
+        result.matrix.resize(rows, vector<int>(columns));
+
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < columns; ++j) {
+                result.matrix[i][j] = matrix[i][j] + other.matrix[i][j];
+            }
+        }
+        return result;
+    }
+
+    Matrix operator-(const Matrix &other) const {
+        if (rows != other.rows || columns != other.columns) {
+            throw invalid_argument("matrices must have the same dimensions for subtraction");
+        }
+
+        Matrix result;
+        result.rows = rows;
+        result.columns = columns;
+        result.matrix.resize(rows, vector<int>(columns));
+
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < columns; ++j) {
+                result.matrix[i][j] = matrix[i][j] - other.matrix[i][j];
+            }
+        }
+        return result;
+    }
 };
 
 void initMatrix(Matrix &mat, int rows, int columns) {
@@ -17,64 +53,34 @@ void initMatrix(Matrix &mat, int rows, int columns) {
 }
 
 void saveMatrix(Matrix &mat) {
-    cout << "Enter size of matrix. Example: 5x5, (rows x columns): ";
+    cout << "Enter size of matrix. Example: 5x5: ";
     string input;
     cin >> input;
 
     mat.rows = int(input[0]) - '0';
     mat.columns = int(input[2]) - '0';
 
-
     initMatrix(mat, mat.rows, mat.columns);
 
-    for (int count_rows = 0; count_rows < mat.rows; count_rows++) {
-        for (int count_columns = 0; count_columns < mat.columns; count_columns++) {
-            cout << "Enter value for " << count_rows + 1 << "th row's " << count_columns + 1 << "th column's element: ";
-            cin >> mat.matrix[count_rows][count_columns];
+    for (int i = 0; i < mat.rows; ++i) {
+        for (int j = 0; j < mat.columns; ++j) {
+            cout << "Enter value for " << i + 1 << "th row's " << j + 1 << "th column's element: ";
+            cin >> mat.matrix[i][j];
         }
     }
-}
-
-Matrix addMatrixToMatrix(const Matrix &A, const Matrix &B) {
-    Matrix result;
-    initMatrix(result, A.rows, A.columns);
-
-    for (int count_rows = 0; count_rows < A.rows; count_rows++) {
-        for (int count_columns = 0; count_columns < A.columns; count_columns++) {
-            result.matrix[count_rows][count_columns] = A.matrix[count_rows][count_columns] + B.matrix[count_rows][count_columns];
-        }
-    }
-    return result;
-}
-
-Matrix subtractFromMatrix(const Matrix &A, const Matrix &B) {
-    Matrix result;
-    initMatrix(result, A.rows, A.columns);
-
-    for (int count_rows = 0; count_rows < A.rows; count_rows++) {
-        for (int count_columns = 0; count_columns < A.columns; count_columns++) {
-            result.matrix[count_rows][count_columns] = A.matrix[count_rows][count_columns] - B.matrix[count_rows][count_columns];
-        }
-    }
-    return result;
 }
 
 void display(const Matrix &mat) {
-    for (int count_rows = 0; count_rows < mat.rows; count_rows++) {
-        for (int count_columns = 0; count_columns < mat.columns; count_columns++) {
-            cout << mat.matrix[count_rows][count_columns] << " ";
+    for (const auto &row : mat.matrix) {
+        for (const auto &elem : row) {
+            cout << elem << " ";
         }
         cout << endl;
     }
 }
 
-bool checkMatricesForValidation(const Matrix &A, const Matrix &B) {
-    return (A.rows == B.rows && A.columns == B.columns);
-}
-
 int main() {
-    Matrix A;
-    Matrix B;
+    Matrix A, B;
 
     cout << "Enter matrix A: " << endl;
     saveMatrix(A);
@@ -87,15 +93,8 @@ int main() {
     cout << "Choose the function between matrices:\n\n1: addition (+) \n2: subtraction (-) \n\nExample of input: 1: ";
     cin >> action;
 
-    if (checkMatricesForValidation(A, B))
-        cout << "Matrices are compatible, executing..." << endl;
-    else {
-        cout << "Error! Matrices are incompatible!" << endl;
-        return 0;
-    }
-
-    Matrix result = (action == '1' ? addMatrixToMatrix(A, B) : subtractFromMatrix(A, B));
+    Matrix result;
+    result = (action == '1') ? (A + B) : (A - B);
     display(result);
 
-    return 0;
 }
